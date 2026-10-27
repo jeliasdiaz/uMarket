@@ -1,0 +1,31 @@
+caso,corrida,conjunto,categoria,interprete_usado,acierto5,filtros_ok,inventados,inventados_crudo,respaldo,sin_resultados,latencia_interpretar_s,tokens,costo_usd,top5
+happy-1,1,dev,happy,palabras,True,True,[],[],False,False,0.002,0,0.0,"[""empanadas-dona-rosa/empanada-de-pollo"", ""empanadas-dona-rosa/empanada-de-queso"", ""empanadas-dona-rosa/empanada-de-carne"", ""arepas-la-70/arepa-rellena-de-pollo"", ""arepas-la-70/arepa-rellena-de-pollo""]"
+happy-2,1,dev,happy,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""dulces-de-caro/brownie"", ""dulces-de-caro/brownie""]"
+happy-3,1,dev,happy,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""jugos-naturales-pipe/jugo-de-mora""]"
+intencion-1,1,dev,intencion,palabras,True,True,[],[],False,False,0.001,0,0.0,"[""dulces-de-caro/galletas-de-avena"", ""dulces-de-caro/brownie"", ""dulces-de-caro/torta-de-chocolate"", ""dulces-de-caro/galletas-de-avena"", ""dulces-de-caro/brownie""]"
+intencion-2,1,dev,intencion,palabras,False,True,[],[],False,False,0.0,0,0.0,"[""empanadas-dona-rosa/empanada-de-carne""]"
+intencion-3,1,dev,intencion,palabras,False,True,[],[],False,True,0.0,0,0.0,[]
+intencion-4,1,dev,intencion,palabras,False,True,[],[],False,True,0.0,0,0.0,[]
+intencion-5,1,dev,intencion,palabras,False,True,[],[],False,True,0.0,0,0.0,[]
+intencion-6,1,dev,intencion,palabras,False,True,[],[],False,True,0.0,0,0.0,[]
+intencion-7,1,dev,intencion,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""dulces-de-caro/galletas-de-avena"", ""dulces-de-caro/brownie"", ""dulces-de-caro/torta-de-chocolate"", ""dulces-de-caro/cheesecake-de-maracuya"", ""dulces-de-caro/galletas-de-avena""]"
+multi-1,1,dev,multi,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""empanadas-dona-rosa/empanada-de-pollo"", ""empanadas-dona-rosa/empanada-de-queso"", ""empanadas-dona-rosa/empanada-de-carne"", ""jugos-naturales-pipe/jugo-de-mora""]"
+incompleto-1,1,dev,incompleto,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""almuerzos-caseros-marta/almuerzo-vegetariano"", ""almuerzos-caseros-marta/almuerzo-ejecutivo"", ""arepas-la-70/arepa-de-queso"", ""arepas-la-70/arepa-con-huevo"", ""arepas-la-70/arepa-rellena-de-pollo""]"
+ambiguo-1,1,dev,ambiguo,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""almuerzos-caseros-marta/almuerzo-vegetariano"", ""almuerzos-caseros-marta/almuerzo-ejecutivo"", ""arepas-la-70/arepa-de-queso"", ""arepas-la-70/arepa-con-huevo"", ""arepas-la-70/arepa-rellena-de-pollo""]"
+adversarial-1,1,dev,adversarial,palabras,False,True,[],[],False,True,0.0,0,0.0,[]
+adversarial-2,1,dev,adversarial,palabras,True,True,[],[],False,False,0.001,0,0.0,"[""arepas-la-70/arepa-rellena-de-pollo"", ""arepas-la-70/arepa-de-queso"", ""arepas-la-70/arepa-con-huevo"", ""arepas-la-70/arepa-rellena-de-pollo"", ""arepas-la-70/arepa-de-queso""]"
+edge-1,1,dev,edge,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""empanadas-dona-rosa/empanada-de-pollo"", ""empanadas-dona-rosa/empanada-de-queso"", ""empanadas-dona-rosa/empanada-de-carne""]"
+edge-2,1,dev,edge,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""jugos-naturales-pipe/cafe-tinto""]"
+edge-3,1,dev,edge,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""arepas-la-70/arepa-de-queso"", ""arepas-la-70/arepa-con-huevo"", ""arepas-la-70/arepa-rellena-de-pollo""]"
+test-1,1,test,happy,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""empanadas-dona-rosa/empanada-de-queso""]"
+test-2,1,test,happy,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""bunuelos-del-profe/pandebono""]"
+test-3,1,test,intencion,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""dulces-de-caro/galletas-de-avena"", ""dulces-de-caro/brownie"", ""dulces-de-caro/torta-de-chocolate"", ""dulces-de-caro/cheesecake-de-maracuya"", ""dulces-de-caro/galletas-de-avena""]"
+test-4,1,test,intencion,palabras,False,True,[],[],False,True,0.001,0,0.0,[]
+test-5,1,test,intencion,palabras,False,True,[],[],False,True,0.001,0,0.0,[]
+test-6,1,test,intencion,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""frutas-y-snacks-lu/mango-con-sal-y-limon"", ""frutas-y-snacks-lu/salpicon""]"
+test-7,1,test,multi,palabras,True,True,[],[],False,False,0.001,0,0.0,"[""bunuelos-del-profe/bunuelo""]"
+test-8,1,test,edge,palabras,True,True,[],[],False,False,0.001,0,0.0,"[""dulces-de-caro/galletas-de-avena"", ""dulces-de-caro/brownie"", ""dulces-de-caro/torta-de-chocolate"", ""dulces-de-caro/cheesecake-de-maracuya"", ""jugos-naturales-pipe/jugo-de-mora""]"
+test-9,1,test,incompleto,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""almuerzos-caseros-marta/almuerzo-vegetariano"", ""almuerzos-caseros-marta/almuerzo-ejecutivo"", ""arepas-la-70/arepa-de-queso"", ""arepas-la-70/arepa-con-huevo"", ""arepas-la-70/arepa-rellena-de-pollo""]"
+test-10,1,test,intencion,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""bunuelos-del-profe/bunuelo"", ""bunuelos-del-profe/pandebono"", ""dulces-de-caro/galletas-de-avena"", ""dulces-de-caro/galletas-de-avena"", ""jugos-naturales-pipe/cafe-tinto""]"
+test-11,1,test,multi,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""arepas-la-70/arepa-con-huevo"", ""arepas-la-70/arepa-de-queso"", ""arepas-la-70/arepa-rellena-de-pollo"", ""arepas-la-70/arepa-con-huevo"", ""arepas-la-70/arepa-de-queso""]"
+test-12,1,test,adversarial,palabras,True,True,[],[],False,False,0.0,0,0.0,"[""dulces-de-caro/brownie"", ""dulces-de-caro/brownie""]"

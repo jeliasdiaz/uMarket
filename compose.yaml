@@ -1,0 +1,26 @@
+# Postgres local para desarrollo y tests de integracion.
+#
+# Misma version mayor que el proyecto de Neon (17): una migracion que funciona
+# aqui tiene que funcionar alla. Produccion y previews usan Neon; los tests no
+# dependen de Neon ni de la red.
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: umarket
+      POSTGRES_PASSWORD: umarket
+      POSTGRES_DB: umarket
+    ports:
+      - "5433:5432"
+    volumes:
+      - datos_pg:/var/lib/postgresql/data
+      # Crea la base de tests junto a la de desarrollo.
+      - ./backend/scripts/sql/crear_bd_tests.sql:/docker-entrypoint-initdb.d/crear_bd_tests.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U umarket"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  datos_pg:

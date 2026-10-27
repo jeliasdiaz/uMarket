@@ -1,0 +1,228 @@
+{
+  "$defs": {
+    "Categoria": {
+      "enum": [
+        "empanadas",
+        "arepas",
+        "almuerzos",
+        "postres",
+        "bebidas",
+        "snacks",
+        "frutas",
+        "otros"
+      ],
+      "title": "Categoria",
+      "type": "string"
+    },
+    "Etiqueta": {
+      "enum": [
+        "dulce",
+        "salado",
+        "vegetariano",
+        "picante",
+        "frio",
+        "caliente"
+      ],
+      "title": "Etiqueta",
+      "type": "string"
+    },
+    "ItemBuscado": {
+      "properties": {
+        "termino": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Producto en palabras simples: 'empanada'.",
+          "title": "Termino"
+        },
+        "categoria": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Categoria"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "etiquetas": {
+          "items": {
+            "$ref": "#/$defs/Etiqueta"
+          },
+          "maxItems": 4,
+          "title": "Etiquetas",
+          "type": "array"
+        },
+        "cantidad": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Unidades pedidas, si las dice.",
+          "title": "Cantidad"
+        },
+        "mencion": {
+          "description": "Fragmento literal del texto.",
+          "maxLength": 120,
+          "title": "Mencion",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mencion"
+      ],
+      "title": "ItemBuscado",
+      "type": "object"
+    },
+    "Menciones": {
+      "properties": {
+        "precio": {
+          "anyOf": [
+            {
+              "maxLength": 60,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Precio"
+        },
+        "franja": {
+          "anyOf": [
+            {
+              "maxLength": 60,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Franja"
+        },
+        "punto": {
+          "anyOf": [
+            {
+              "maxLength": 60,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Punto"
+        }
+      },
+      "title": "Menciones",
+      "type": "object"
+    },
+    "Orden": {
+      "enum": [
+        "relevancia",
+        "precio",
+        "calificacion"
+      ],
+      "title": "Orden",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "es_busqueda": {
+      "description": "False si el texto no busca comida o productos.",
+      "title": "Es Busqueda",
+      "type": "boolean"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/ItemBuscado"
+      },
+      "maxItems": 5,
+      "title": "Items",
+      "type": "array"
+    },
+    "precio_max_unitario_cop": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Precio Max Unitario Cop"
+    },
+    "presupuesto_total_cop": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Presupuesto Total Cop"
+    },
+    "franja_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Franja Id"
+    },
+    "punto_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Punto Id"
+    },
+    "punto_candidatos": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4,
+      "title": "Punto Candidatos",
+      "type": "array"
+    },
+    "orden": {
+      "$ref": "#/$defs/Orden",
+      "default": "relevancia"
+    },
+    "menciones": {
+      "$ref": "#/$defs/Menciones"
+    }
+  },
+  "required": [
+    "es_busqueda"
+  ],
+  "title": "ConsultaInterpretada",
+  "type": "object"
+}

@@ -1,0 +1,26 @@
+# Secretos: el .env real nunca se commitea (QuickDev tuvo una clave en su historial).
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+backend/.cache/
+
+# Node / Next.js
+web/node_modules/
+web/.next/
+web/out/
+web/next-env.d.ts
+web/*.tsbuildinfo
+web/test-results/
+web/playwright-report/
+
+# Sistema
+.DS_Store
+Thumbs.db

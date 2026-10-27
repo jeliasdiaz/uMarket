@@ -1,0 +1,122 @@
+{
+  "$defs": {
+    "FranjaContexto": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "inicio": {
+          "title": "Inicio",
+          "type": "string"
+        },
+        "fin": {
+          "title": "Fin",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "inicio",
+        "fin"
+      ],
+      "title": "FranjaContexto",
+      "type": "object"
+    },
+    "PuntoContexto": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "nombre": {
+          "title": "Nombre",
+          "type": "string"
+        },
+        "alias": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Alias",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "nombre",
+        "alias"
+      ],
+      "title": "PuntoContexto",
+      "type": "object"
+    },
+    "Vocabulario": {
+      "properties": {
+        "categorias": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Categorias",
+          "type": "array"
+        },
+        "etiquetas": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Etiquetas",
+          "type": "array"
+        },
+        "productos_hoy": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Productos Hoy",
+          "type": "array"
+        }
+      },
+      "required": [
+        "categorias",
+        "etiquetas",
+        "productos_hoy"
+      ],
+      "title": "Vocabulario",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "texto": {
+      "maxLength": 200,
+      "title": "Texto",
+      "type": "string"
+    },
+    "ahora": {
+      "title": "Ahora",
+      "type": "string"
+    },
+    "vocabulario": {
+      "$ref": "#/$defs/Vocabulario"
+    },
+    "puntos": {
+      "items": {
+        "$ref": "#/$defs/PuntoContexto"
+      },
+      "title": "Puntos",
+      "type": "array"
+    },
+    "franjas_abiertas": {
+      "items": {
+        "$ref": "#/$defs/FranjaContexto"
+      },
+      "title": "Franjas Abiertas",
+      "type": "array"
+    }
+  },
+  "required": [
+    "texto",
+    "ahora",
+    "vocabulario",
+    "puntos",
+    "franjas_abiertas"
+  ],
+  "title": "EntradaInterprete",
+  "type": "object"
+}

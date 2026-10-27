@@ -1,0 +1,50 @@
+{
+  "product_name": "uMarket - busqueda por intencion",
+  "schema_version": "v1",
+  "user": "Estudiante comprador en un campus universitario que quiere comer o comprar algo a otro estudiante, normalmente desde el celular y con poco tiempo entre clases.",
+  "jtbd": "Cuando tengo hambre o un antojo entre clases, quiero escribir lo que se me antoja como se lo diria a un amigo ('algo dulce por menos de 5 mil pa las 12 en el 19') y ver de una vez que vendedores lo tienen en stock, donde y a que hora, para pedirlo sin preguntar por chats ni recorrer el campus.",
+  "problem_thesis": "Creemos que el comprador no sabe quien vende que, donde ni cuando, y que eso le cuesta ventas al vendedor (demanda). Hipotesis por validar en la Fase 0.",
+  "current_alternative": "Preguntar en grupos de WhatsApp, recorrer el campus o comprar siempre al mismo vendedor.",
+  "non_ai_baseline": "Busqueda por palabras clave con texto completo en espanol, trigramas para errores de tipeo, coincidencia exacta con el vocabulario cerrado y parsers deterministas de montos, horas, cantidades y puntos (interprete 'palabras'). Es tambien el respaldo cuando el modelo falla.",
+  "why_ai_has_advantage": "Entender intencion que no nombra un producto: negaciones ('sin carne'), categorias implicitas ('pa almorzar', 'de tomar'), diminutivos y jerga ('saladito pa picar'), y pedidos de orden ('lo mas barato').",
+  "input_required": [
+    "Texto libre del comprador, hasta 200 caracteres, sin datos personales (se reemplazan correos y telefonos antes de enviarlo).",
+    "Contexto del campus: vocabulario cerrado de categorias y etiquetas, productos con stock hoy, puntos de encuentro con alias y franjas abiertas."
+  ],
+  "ai_job": [
+    "Decidir si el texto es una busqueda.",
+    "Separar los items que busca, con termino, categoria, etiquetas y cantidad cuando las dice.",
+    "Extraer topes de precio o presupuesto que el texto dice.",
+    "Asignar franja y punto cuando el texto los menciona; declarar candidatos si el punto es ambiguo.",
+    "Elegir el orden pedido (relevancia, precio o calificacion).",
+    "Copiar literal el fragmento que justifica cada filtro."
+  ],
+  "system_validations": [
+    "mencion_no_literal",
+    "monto_sin_respaldo",
+    "monto_implausible",
+    "punto_desconocido",
+    "franja_cerrada",
+    "cantidad_irrazonable",
+    "consulta_inutilizable"
+  ],
+  "output_fields": {
+    "es_busqueda": "boolean: false solo si el texto no busca nada.",
+    "items": "array de hasta 5 {termino, categoria (vocabulario cerrado), etiquetas (vocabulario cerrado), cantidad, mencion literal}.",
+    "precio_max_unitario_cop": "integer o null: tope por unidad dicho en el texto.",
+    "presupuesto_total_cop": "integer o null: cuanto tiene en total.",
+    "franja_id": "id de una franja abierta o null.",
+    "punto_id": "id de un punto o null si no lo menciona o es ambiguo.",
+    "punto_candidatos": "ids de los puntos posibles cuando la mencion es ambigua.",
+    "orden": "relevancia | precio | calificacion.",
+    "menciones": "{precio, franja, punto}: fragmentos literales que justifican esos filtros."
+  },
+  "never": [
+    "Elegir, ordenar o promocionar tiendas: el contrato no tiene campos para eso.",
+    "Poner precios de venta, totales o stock: los pone el codigo desde la base de datos.",
+    "Inventar un filtro sin respaldo literal: el validador lo anula."
+  ],
+  "human_decision": "El comprador ve los filtros entendidos, puede quitarlos, y elige vendedor y cantidades en el carrito. El vendedor aprueba el pedido.",
+  "success_metric": "Acierto@5 sobre consultas reales al menos 15 puntos sobre el baseline, cero filtros inventados en adversariales y p95 de interpretacion de 2 s o menos (PLAN-Y-DECISIONES.md §4.3).",
+  "riskiest_assumption": "Que los compradores escriben intencion (no nombres de producto) con la frecuencia suficiente para que el modelo aporte sobre el baseline. Se mide con el registro de busquedas reales."
+}

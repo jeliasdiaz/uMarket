@@ -1,0 +1,173 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "umarket"
+version = "0.1.0"
+description = "Tienda del estudiante: el modelo interpreta lenguaje, el codigo verifica hechos, una persona decide."
+requires-python = ">=3.13"
+
+# Las versiones exactas viven en uv.lock. `uv sync --locked` falla si el lock no
+# corresponde al pyproject: un baseline de evals no es comparable si el entorno
+# flota (leccion de QuickDev).
+dependencies = [
+  "fastapi>=0.120",
+  "uvicorn>=0.38",
+  "pydantic>=2.12",
+  "pydantic-settings>=2.11",
+  "email-validator>=2.3",
+  "sqlalchemy>=2.0.44",
+  "psycopg[binary]>=3.2.12",
+  "alembic>=1.17",
+  "google-genai>=1.50",
+  "pywebpush>=2.1",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.4",
+  "hypothesis>=6.140",
+  "httpx>=0.28",
+  "ruff>=0.14",
+  "pyright>=1.1.407",
+  "import-linter>=2.5",
+]
+
+[project.scripts]
+umarket-worker = "umarket.worker.principal:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/umarket"]
+
+# ---------------------------------------------------------------------------
+# pytest
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+# `llm` gasta cuota y depende de la red: deseleccionado por defecto. Una suite
+# que cuesta dinero no se corre, y una suite que no se corre no protege nada.
+addopts = "-m 'not llm' --strict-markers -q"
+markers = [
+  "integracion: necesita Postgres (DATABASE_URL_TEST); se salta si no hay",
+  "llm: llama a un proveedor real de LLM (usa -m llm)",
+]
+
+# ---------------------------------------------------------------------------
+# ruff
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests", "evals", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+# Textos de dominio en espanol: tildes y signos de apertura son legitimos.
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["umarket", "tests", "scripts", "evals"]
+
+[tool.ruff.lint.per-file-ignores]
+# Los scripts ajustan sys.path antes de importar el paquete: es su forma de correr sueltos.
+"scripts/*" = ["E402"]
+# FastAPI usa llamadas en los valores por defecto (Depends, Header): es su idioma.
+"src/umarket/**/http.py" = ["B008"]
+"src/umarket/http/**" = ["B008"]
+
+# ---------------------------------------------------------------------------
+# pyright: estricto donde vive la logica (dominio y aplicacion)
+# ---------------------------------------------------------------------------
+[tool.pyright]
+include = ["src", "tests", "evals", "scripts"]
+pythonVersion = "3.13"
+typeCheckingMode = "standard"
+strict = [
+  "src/umarket/compartido",
+  "src/umarket/*/dominio",
+  "src/umarket/*/aplicacion",
+]
+venvPath = "."
+venv = ".venv"
+
+# ---------------------------------------------------------------------------
+# import-linter: la arquitectura se comprueba sola (PLAN-TECNICO.md §2.3)
+# ---------------------------------------------------------------------------
+[tool.importlinter]
+root_packages = ["umarket"]
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "Regla 1: el dominio no conoce infraestructura"
+type = "forbidden"
+source_modules = [
+  "umarket.compartido",
+  "umarket.identidad.dominio",
+  "umarket.campus.dominio",
+  "umarket.catalogo.dominio",
+  "umarket.pedidos.dominio",
+  "umarket.reputacion.dominio",
+  "umarket.busqueda.dominio",
+  "umarket.notificaciones.dominio",
+]
+forbidden_modules = [
+  "sqlalchemy",
+  "fastapi",
+  "starlette",
+  "httpx",
+  "google",
+  "psycopg",
+  "pywebpush",
+  "umarket.ia",
+  "umarket.http",
+  "umarket.arranque",
+  "umarket.config",
+]
+
+[[tool.importlinter.contracts]]
+name = "Regla 2: la aplicacion no conoce adaptadores ni frameworks"
+type = "forbidden"
+source_modules = [
+  "umarket.identidad.aplicacion",
+  "umarket.campus.aplicacion",
+  "umarket.catalogo.aplicacion",
+  "umarket.pedidos.aplicacion",
+  "umarket.reputacion.aplicacion",
+  "umarket.busqueda.aplicacion",
+  "umarket.notificaciones.aplicacion",
+]
+forbidden_modules = [
+  "sqlalchemy",
+  "fastapi",
+  "starlette",
+  "google",
+  "psycopg",
+  "pywebpush",
+  "umarket.http",
+  "umarket.arranque",
+]
+
+[[tool.importlinter.contracts]]
+name = "Regla 4: solo el adaptador de Gemini importa el SDK de Google"
+type = "forbidden"
+source_modules = [
+  "umarket.compartido",
+  "umarket.identidad",
+  "umarket.campus",
+  "umarket.catalogo",
+  "umarket.pedidos",
+  "umarket.reputacion",
+  "umarket.busqueda",
+  "umarket.notificaciones",
+  "umarket.http",
+  # El punto de entrada del worker (principal.py) compone desde arranque, como la API:
+  # es raiz de composicion. La regla aplica a lo que el worker hace, no a como arranca.
+  "umarket.worker.despachador",
+  "umarket.ia.puerto",
+  "umarket.ia.traza",
+  "umarket.ia.prompts",
+  "umarket.ia.precios",
+]
+forbidden_modules = ["google"]

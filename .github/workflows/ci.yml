@@ -1,0 +1,122 @@
+# Las garantias del repo, ejecutandose solas en cada cambio (PLAN-TECNICO.md §12.3).
+#
+# Nada de esto llama a un LLM ni necesita GEMINI_API_KEY: pytest deselecciona `llm`,
+# las regresiones son deterministas y los evals corren en replay con FakeLlm. Una
+# suite que cuesta dinero no se corre, y una suite que no se corre no protege nada.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PGHOST: localhost
+  PGUSER: umarket
+  PGPASSWORD: umarket
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    services:
+      postgres:
+        # Misma version mayor que Neon: lo que migra aqui, migra alla.
+        image: postgres:17
+        env:
+          POSTGRES_USER: umarket
+          POSTGRES_PASSWORD: umarket
+          POSTGRES_DB: umarket_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U umarket" --health-interval 2s --health-timeout 3s --health-retries 30
+    env:
+      DATABASE_URL: postgresql+psycopg://umarket:umarket@localhost:5432/umarket_test
+      DATABASE_URL_TEST: postgresql+psycopg://umarket:umarket@localhost:5432/umarket_test
+      DATABASE_URL_EVALS: postgresql+psycopg://umarket:umarket@localhost:5432/umarket_evals
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+      - name: Instalar (con el lock exacto)
+        run: uv sync --locked
+      - name: Base de evals
+        run: psql -c "CREATE DATABASE umarket_evals OWNER umarket"
+      - name: Ruff
+        run: uv run ruff format --check . && uv run ruff check .
+      - name: Pyright (estricto en dominio y aplicacion)
+        run: uv run pyright
+      - name: Arquitectura (import-linter)
+        run: uv run lint-imports
+      - name: Tests (dominio, aplicacion, integracion con Postgres)
+        run: uv run pytest
+      - name: Puerta de regresiones del validador
+        run: uv run python scripts/gate_regresiones.py
+      - name: Contratos al dia (golden)
+        run: uv run python scripts/exportar_contratos.py --verificar
+      - name: Replay de las mediciones, sin red
+        run: |
+          uv run python -m evals correr --interprete palabras --reglas consulta-v2
+          uv run python -m evals correr --interprete intencion --reglas consulta-v2 \
+            --replay evals/resultados/2026-10-27-busqueda-intencion-v1-consulta-v1/crudo.json
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - name: Tipos de la API al dia con el OpenAPI
+        run: npm run api:tipos && git diff --exit-code src/api/esquema.d.ts
+      - run: npx next typegen
+      - run: npm run tipos
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+
+  e2e:
+    if: github.event_name == 'pull_request'
+    needs: [backend, web]
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: umarket
+          POSTGRES_PASSWORD: umarket
+          POSTGRES_DB: umarket_e2e
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U umarket" --health-interval 2s --health-timeout 3s --health-retries 30
+    env:
+      DATABASE_URL: postgresql+psycopg://umarket:umarket@localhost:5432/umarket_e2e
+      DATABASE_URL_E2E: postgresql+psycopg://umarket:umarket@localhost:5432/umarket_e2e
+      CI: "true"
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: uv sync --locked
+        working-directory: backend
+      - run: uv run python scripts/preparar_e2e.py
+        working-directory: backend
+      - run: npm ci && npm run build && npx playwright install --with-deps chromium
+        working-directory: web
+      - run: npx playwright test
+        working-directory: web

@@ -1,0 +1,90 @@
+{
+  "_descripcion": "Catalogo FIJO de prueba del campus demo. Lo usan los tests, los evals y la semilla --demo. Los turnos son del dia de la prueba; la hora de referencia de los evals es 11:20 (f-0700 y f-1000 ya pasaron). Las claves 'tienda/producto' son los ids legibles que usan los datasets de evals.",
+  "tiendas": [
+    {
+      "slug": "empanadas-dona-rosa",
+      "nombre": "Empanadas Doña Rosa",
+      "descripcion": "Empanadas caseras, recien fritas.",
+      "productos": [
+        {"nombre": "Empanada de pollo", "categoria": "empanadas", "etiquetas": ["salado", "caliente"], "precio_cop": 3000},
+        {"nombre": "Empanada de queso", "categoria": "empanadas", "etiquetas": ["salado", "vegetariano", "caliente"], "precio_cop": 3000},
+        {"nombre": "Empanada de carne", "categoria": "empanadas", "etiquetas": ["salado", "caliente"], "precio_cop": 3000}
+      ],
+      "turnos": [{"franja": "f-1200", "punto": "b19-entrada", "stock": 10}]
+    },
+    {
+      "slug": "arepas-la-70",
+      "nombre": "Arepas La 70",
+      "descripcion": "Arepas de choclo y rellenas.",
+      "productos": [
+        {"nombre": "Arepa de queso", "categoria": "arepas", "etiquetas": ["salado", "vegetariano", "caliente"], "precio_cop": 4000},
+        {"nombre": "Arepa con huevo", "categoria": "arepas", "etiquetas": ["salado", "caliente"], "precio_cop": 5000},
+        {"nombre": "Arepa rellena de pollo", "categoria": "arepas", "etiquetas": ["salado", "caliente"], "precio_cop": 6500}
+      ],
+      "turnos": [
+        {"franja": "f-1200", "punto": "biblioteca", "stock": 8},
+        {"franja": "f-1600", "punto": "b19-cafeteria", "stock": 6}
+      ]
+    },
+    {
+      "slug": "dulces-de-caro",
+      "nombre": "Dulces de Caro",
+      "descripcion": "Reposteria hecha en casa.",
+      "productos": [
+        {"nombre": "Brownie", "descripcion": "De chocolate con nueces.", "categoria": "postres", "etiquetas": ["dulce"], "precio_cop": 3500},
+        {"nombre": "Galletas de avena", "categoria": "postres", "etiquetas": ["dulce", "vegetariano"], "precio_cop": 2000},
+        {"nombre": "Torta de chocolate", "descripcion": "Porcion.", "categoria": "postres", "etiquetas": ["dulce"], "precio_cop": 4500},
+        {"nombre": "Cheesecake de maracuya", "categoria": "postres", "etiquetas": ["dulce", "frio"], "precio_cop": 7000}
+      ],
+      "turnos": [
+        {"franja": "f-1200", "punto": "b19-cafeteria", "stock": 12},
+        {"franja": "f-1600", "punto": "cafeteria-central", "stock": 6}
+      ]
+    },
+    {
+      "slug": "jugos-naturales-pipe",
+      "nombre": "Jugos Naturales Pipe",
+      "descripcion": "Jugos en agua o leche y tinto.",
+      "productos": [
+        {"nombre": "Jugo de mora", "categoria": "bebidas", "etiquetas": ["frio", "dulce", "vegetariano"], "precio_cop": 3000},
+        {"nombre": "Limonada de coco", "categoria": "bebidas", "etiquetas": ["frio", "dulce"], "precio_cop": 4000},
+        {"nombre": "Cafe tinto", "categoria": "bebidas", "etiquetas": ["caliente"], "precio_cop": 1500}
+      ],
+      "turnos": [
+        {"franja": "f-1000", "punto": "cafeteria-central", "stock": 10},
+        {"franja": "f-1200", "punto": "cafeteria-central", "stock": 10}
+      ]
+    },
+    {
+      "slug": "almuerzos-caseros-marta",
+      "nombre": "Almuerzos Caseros Marta",
+      "descripcion": "Corrientazo con sopa y jugo.",
+      "productos": [
+        {"nombre": "Almuerzo ejecutivo", "descripcion": "Arroz, proteina, ensalada y sopa.", "categoria": "almuerzos", "etiquetas": ["salado", "caliente"], "precio_cop": 12000},
+        {"nombre": "Almuerzo vegetariano", "descripcion": "Arroz, lentejas, ensalada y sopa.", "categoria": "almuerzos", "etiquetas": ["salado", "vegetariano", "caliente"], "precio_cop": 11000}
+      ],
+      "turnos": [{"franja": "f-1200", "punto": "b19-entrada", "stock": 6}]
+    },
+    {
+      "slug": "frutas-y-snacks-lu",
+      "nombre": "Frutas y Snacks Lu",
+      "descripcion": "Fruta picada y mecato.",
+      "productos": [
+        {"nombre": "Salpicon", "categoria": "frutas", "etiquetas": ["dulce", "frio", "vegetariano"], "precio_cop": 4000},
+        {"nombre": "Mango con sal y limon", "categoria": "frutas", "etiquetas": ["vegetariano"], "precio_cop": 3000},
+        {"nombre": "Papas de paquete", "categoria": "snacks", "etiquetas": ["salado"], "precio_cop": 2500}
+      ],
+      "turnos": [{"franja": "f-1600", "punto": "biblioteca", "stock": 10}]
+    },
+    {
+      "slug": "bunuelos-del-profe",
+      "nombre": "Buñuelos del Profe",
+      "descripcion": "Buñuelos y pandebonos calienticos.",
+      "productos": [
+        {"nombre": "Buñuelo", "categoria": "snacks", "etiquetas": ["salado", "caliente"], "precio_cop": 1500},
+        {"nombre": "Pandebono", "categoria": "snacks", "etiquetas": ["salado", "caliente"], "precio_cop": 2000}
+      ],
+      "turnos": [{"franja": "f-1200", "punto": "biblioteca", "stock": 15}]
+    }
+  ]
+}

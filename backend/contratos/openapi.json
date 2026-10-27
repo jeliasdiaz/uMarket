@@ -1,0 +1,2774 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "uMarket API",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/v1/auth/codigo": {
+      "post": {
+        "tags": [
+          "acceso"
+        ],
+        "summary": "Pedir Codigo",
+        "operationId": "pedir_codigo_v1_auth_codigo_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PedirCodigo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Pedir Codigo V1 Auth Codigo Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/auth/verificar": {
+      "post": {
+        "tags": [
+          "acceso"
+        ],
+        "summary": "Verificar",
+        "operationId": "verificar_v1_auth_verificar_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Verificar"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/auth/salir": {
+      "post": {
+        "tags": [
+          "acceso"
+        ],
+        "summary": "Salir",
+        "operationId": "salir_v1_auth_salir_post",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        }
+      }
+    },
+    "/v1/yo": {
+      "get": {
+        "tags": [
+          "acceso"
+        ],
+        "summary": "Yo",
+        "operationId": "yo_v1_yo_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/campus/actual": {
+      "get": {
+        "tags": [
+          "campus"
+        ],
+        "summary": "Campus Actual",
+        "operationId": "campus_actual_v1_campus_actual_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampusDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vocabulario": {
+      "get": {
+        "tags": [
+          "catalogo"
+        ],
+        "summary": "Vocabulario",
+        "operationId": "vocabulario_v1_vocabulario_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VocabularioDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/tiendas": {
+      "get": {
+        "tags": [
+          "catalogo"
+        ],
+        "summary": "Listar Tiendas",
+        "operationId": "listar_tiendas_v1_tiendas_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ResumenTiendaDTO"
+                  },
+                  "type": "array",
+                  "title": "Response Listar Tiendas V1 Tiendas Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/tiendas/{slug}": {
+      "get": {
+        "tags": [
+          "catalogo"
+        ],
+        "summary": "Ver Tienda",
+        "operationId": "ver_tienda_v1_tiendas__slug__get",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Slug"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TiendaDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vendedor/tienda": {
+      "get": {
+        "tags": [
+          "catalogo"
+        ],
+        "summary": "Mi Tienda",
+        "operationId": "mi_tienda_v1_vendedor_tienda_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MiTiendaDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "catalogo"
+        ],
+        "summary": "Crear Tienda",
+        "operationId": "crear_tienda_v1_vendedor_tienda_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NuevaTienda"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MiTiendaDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vendedor/productos": {
+      "post": {
+        "tags": [
+          "catalogo"
+        ],
+        "summary": "Crear Producto",
+        "operationId": "crear_producto_v1_vendedor_productos_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DatosProductoDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vendedor/productos/{producto_id}": {
+      "put": {
+        "tags": [
+          "catalogo"
+        ],
+        "summary": "Editar Producto",
+        "operationId": "editar_producto_v1_vendedor_productos__producto_id__put",
+        "parameters": [
+          {
+            "name": "producto_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Producto Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DatosProductoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vendedor/turnos": {
+      "post": {
+        "tags": [
+          "catalogo"
+        ],
+        "summary": "Publicar Turno",
+        "operationId": "publicar_turno_v1_vendedor_turnos_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NuevoTurno"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TurnoCreadoDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vendedor/turnos/{turno_id}/stock": {
+      "put": {
+        "tags": [
+          "catalogo"
+        ],
+        "summary": "Editar Stock",
+        "operationId": "editar_stock_v1_vendedor_turnos__turno_id__stock_put",
+        "parameters": [
+          {
+            "name": "turno_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Turno Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CambioStock"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TurnoCreadoDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vendedor/turnos/duplicar": {
+      "post": {
+        "tags": [
+          "catalogo"
+        ],
+        "summary": "Duplicar Turnos",
+        "operationId": "duplicar_turnos_v1_vendedor_turnos_duplicar_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Duplicar"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/TurnoCreadoDTO"
+                  },
+                  "type": "array",
+                  "title": "Response Duplicar Turnos V1 Vendedor Turnos Duplicar Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/calificaciones": {
+      "post": {
+        "tags": [
+          "reputacion"
+        ],
+        "summary": "Calificar",
+        "operationId": "calificar_v1_calificaciones_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NuevaCalificacion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Calificar V1 Calificaciones Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/tiendas/{slug}/resenas": {
+      "get": {
+        "tags": [
+          "reputacion"
+        ],
+        "summary": "Resenas",
+        "operationId": "resenas_v1_tiendas__slug__resenas_get",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Slug"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResenaDTO"
+                  },
+                  "title": "Response Resenas V1 Tiendas  Slug  Resenas Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pedidos": {
+      "post": {
+        "tags": [
+          "pedidos"
+        ],
+        "summary": "Crear Pedido",
+        "operationId": "crear_pedido_v1_pedidos_post",
+        "parameters": [
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 80,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NuevoPedido"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "pedidos"
+        ],
+        "summary": "Mis Pedidos",
+        "operationId": "mis_pedidos_v1_pedidos_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PedidoDTO"
+                  },
+                  "title": "Response Mis Pedidos V1 Pedidos Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pedidos/{pedido_id}": {
+      "get": {
+        "tags": [
+          "pedidos"
+        ],
+        "summary": "Ver Pedido",
+        "operationId": "ver_pedido_v1_pedidos__pedido_id__get",
+        "parameters": [
+          {
+            "name": "pedido_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Pedido Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pedidos/{pedido_id}/{accion}": {
+      "post": {
+        "tags": [
+          "pedidos"
+        ],
+        "summary": "Actuar",
+        "operationId": "actuar_v1_pedidos__pedido_id___accion__post",
+        "parameters": [
+          {
+            "name": "pedido_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Pedido Id"
+            }
+          },
+          {
+            "name": "accion",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Accion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Motivo"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Datos"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vendedor/pedidos": {
+      "get": {
+        "tags": [
+          "pedidos"
+        ],
+        "summary": "Bandeja",
+        "operationId": "bandeja_v1_vendedor_pedidos_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PedidoDTO"
+                  },
+                  "type": "array",
+                  "title": "Response Bandeja V1 Vendedor Pedidos Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/push/clave-publica": {
+      "get": {
+        "tags": [
+          "avisos"
+        ],
+        "summary": "Clave Publica",
+        "operationId": "clave_publica_v1_push_clave_publica_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Clave Publica V1 Push Clave Publica Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/push/suscripciones": {
+      "post": {
+        "tags": [
+          "avisos"
+        ],
+        "summary": "Suscribir",
+        "operationId": "suscribir_v1_push_suscripciones_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuscripcionDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Suscribir V1 Push Suscripciones Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/push/desuscribir": {
+      "post": {
+        "tags": [
+          "avisos"
+        ],
+        "summary": "Desuscribir",
+        "operationId": "desuscribir_v1_push_desuscribir_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Desuscribir"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/busquedas": {
+      "post": {
+        "tags": [
+          "busqueda"
+        ],
+        "summary": "Buscar",
+        "operationId": "buscar_v1_busquedas_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NuevaBusqueda"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultadoBusquedaDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/busquedas/{busqueda_id}/filtros": {
+      "post": {
+        "tags": [
+          "busqueda"
+        ],
+        "summary": "Refinar",
+        "operationId": "refinar_v1_busquedas__busqueda_id__filtros_post",
+        "parameters": [
+          {
+            "name": "busqueda_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Busqueda Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Refinar"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultadoBusquedaDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/busquedas/{busqueda_id}/clics": {
+      "post": {
+        "tags": [
+          "busqueda"
+        ],
+        "summary": "Clic",
+        "operationId": "clic_v1_busquedas__busqueda_id__clics_post",
+        "parameters": [
+          {
+            "name": "busqueda_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Busqueda Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Clic"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/salud": {
+      "get": {
+        "tags": [
+          "salud"
+        ],
+        "summary": "Salud",
+        "operationId": "salud_salud_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Salud Salud Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/salud/bd": {
+      "get": {
+        "tags": [
+          "salud"
+        ],
+        "summary": "Salud Bd",
+        "operationId": "salud_bd_salud_bd_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Salud Bd Salud Bd Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Accion": {
+        "type": "string",
+        "enum": [
+          "aprobar",
+          "rechazar",
+          "vencer",
+          "cancelar",
+          "llegue",
+          "entregar",
+          "no_asistio"
+        ],
+        "title": "Accion"
+      },
+      "CambioStock": {
+        "properties": {
+          "stock": {
+            "items": {
+              "$ref": "#/components/schemas/LineaStock"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Stock"
+          }
+        },
+        "type": "object",
+        "required": [
+          "stock"
+        ],
+        "title": "CambioStock"
+      },
+      "CampusDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "zona_horaria": {
+            "type": "string",
+            "title": "Zona Horaria"
+          },
+          "puntos": {
+            "items": {
+              "$ref": "#/components/schemas/PuntoDTO"
+            },
+            "type": "array",
+            "title": "Puntos"
+          },
+          "franjas": {
+            "items": {
+              "$ref": "#/components/schemas/FranjaDTO"
+            },
+            "type": "array",
+            "title": "Franjas"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nombre",
+          "zona_horaria",
+          "puntos",
+          "franjas"
+        ],
+        "title": "CampusDTO"
+      },
+      "Categoria": {
+        "type": "string",
+        "enum": [
+          "empanadas",
+          "arepas",
+          "almuerzos",
+          "postres",
+          "bebidas",
+          "snacks",
+          "frutas",
+          "otros"
+        ],
+        "title": "Categoria"
+      },
+      "Claves": {
+        "properties": {
+          "p256dh": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 10,
+            "title": "P256Dh"
+          },
+          "auth": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 10,
+            "title": "Auth"
+          }
+        },
+        "type": "object",
+        "required": [
+          "p256dh",
+          "auth"
+        ],
+        "title": "Claves"
+      },
+      "Clic": {
+        "properties": {
+          "tienda_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tienda Id"
+          },
+          "producto_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Producto Id"
+          },
+          "posicion": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Posicion"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tienda_id",
+          "posicion"
+        ],
+        "title": "Clic"
+      },
+      "ConsultaInterpretada": {
+        "properties": {
+          "es_busqueda": {
+            "type": "boolean",
+            "title": "Es Busqueda",
+            "description": "False si el texto no busca comida o productos."
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemBuscado"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "title": "Items"
+          },
+          "precio_max_unitario_cop": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Precio Max Unitario Cop"
+          },
+          "presupuesto_total_cop": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Presupuesto Total Cop"
+          },
+          "franja_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Franja Id"
+          },
+          "punto_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Punto Id"
+          },
+          "punto_candidatos": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 4,
+            "title": "Punto Candidatos"
+          },
+          "orden": {
+            "$ref": "#/components/schemas/Orden",
+            "default": "relevancia"
+          },
+          "menciones": {
+            "$ref": "#/components/schemas/Menciones"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "es_busqueda"
+        ],
+        "title": "ConsultaInterpretada"
+      },
+      "DatosProductoDTO": {
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 2,
+            "title": "Nombre"
+          },
+          "descripcion": {
+            "type": "string",
+            "maxLength": 280,
+            "title": "Descripcion",
+            "default": ""
+          },
+          "categoria": {
+            "$ref": "#/components/schemas/Categoria"
+          },
+          "etiquetas": {
+            "items": {
+              "$ref": "#/components/schemas/Etiqueta"
+            },
+            "type": "array",
+            "maxItems": 4,
+            "title": "Etiquetas"
+          },
+          "precio_cop": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Precio Cop"
+          },
+          "activo": {
+            "type": "boolean",
+            "title": "Activo",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "nombre",
+          "categoria",
+          "precio_cop"
+        ],
+        "title": "DatosProductoDTO"
+      },
+      "Desuscribir": {
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Endpoint"
+          }
+        },
+        "type": "object",
+        "required": [
+          "endpoint"
+        ],
+        "title": "Desuscribir"
+      },
+      "Duplicar": {
+        "properties": {
+          "desde": {
+            "type": "string",
+            "format": "date",
+            "title": "Desde"
+          },
+          "hacia": {
+            "type": "string",
+            "format": "date",
+            "title": "Hacia"
+          }
+        },
+        "type": "object",
+        "required": [
+          "desde",
+          "hacia"
+        ],
+        "title": "Duplicar"
+      },
+      "Estado": {
+        "type": "string",
+        "enum": [
+          "pendiente",
+          "aprobado",
+          "rechazado",
+          "vencido",
+          "cancelado",
+          "en_punto",
+          "entregado",
+          "no_asistio"
+        ],
+        "title": "Estado"
+      },
+      "Etiqueta": {
+        "type": "string",
+        "enum": [
+          "dulce",
+          "salado",
+          "vegetariano",
+          "picante",
+          "frio",
+          "caliente"
+        ],
+        "title": "Etiqueta"
+      },
+      "FiltroDTO": {
+        "properties": {
+          "campo": {
+            "type": "string",
+            "title": "Campo"
+          },
+          "etiqueta": {
+            "type": "string",
+            "title": "Etiqueta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "campo",
+          "etiqueta"
+        ],
+        "title": "FiltroDTO"
+      },
+      "FranjaDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "inicio": {
+            "type": "string",
+            "title": "Inicio"
+          },
+          "fin": {
+            "type": "string",
+            "title": "Fin"
+          },
+          "etiqueta": {
+            "type": "string",
+            "title": "Etiqueta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "inicio",
+          "fin",
+          "etiqueta"
+        ],
+        "title": "FranjaDTO"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ItemBuscado": {
+        "properties": {
+          "termino": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Termino",
+            "description": "Producto en palabras simples: 'empanada'."
+          },
+          "categoria": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Categoria"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "etiquetas": {
+            "items": {
+              "$ref": "#/components/schemas/Etiqueta"
+            },
+            "type": "array",
+            "maxItems": 4,
+            "title": "Etiquetas"
+          },
+          "cantidad": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cantidad",
+            "description": "Unidades pedidas, si las dice."
+          },
+          "mencion": {
+            "type": "string",
+            "maxLength": 120,
+            "title": "Mencion",
+            "description": "Fragmento literal del texto."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "mencion"
+        ],
+        "title": "ItemBuscado"
+      },
+      "ItemDTO": {
+        "properties": {
+          "producto_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Producto Id"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "precio_unitario_cop": {
+            "type": "integer",
+            "title": "Precio Unitario Cop"
+          },
+          "cantidad": {
+            "type": "integer",
+            "title": "Cantidad"
+          }
+        },
+        "type": "object",
+        "required": [
+          "producto_id",
+          "nombre",
+          "precio_unitario_cop",
+          "cantidad"
+        ],
+        "title": "ItemDTO"
+      },
+      "LineaDTO": {
+        "properties": {
+          "producto_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Producto Id"
+          },
+          "cantidad": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Cantidad"
+          }
+        },
+        "type": "object",
+        "required": [
+          "producto_id",
+          "cantidad"
+        ],
+        "title": "LineaDTO"
+      },
+      "LineaStock": {
+        "properties": {
+          "producto_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Producto Id"
+          },
+          "total": {
+            "type": "integer",
+            "maximum": 500.0,
+            "minimum": 0.0,
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "producto_id",
+          "total"
+        ],
+        "title": "LineaStock"
+      },
+      "Menciones": {
+        "properties": {
+          "precio": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 60
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Precio"
+          },
+          "franja": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 60
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Franja"
+          },
+          "punto": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 60
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Punto"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "Menciones"
+      },
+      "MiTiendaDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "slug": {
+            "type": "string",
+            "title": "Slug"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "descripcion": {
+            "type": "string",
+            "title": "Descripcion"
+          },
+          "productos": {
+            "items": {
+              "$ref": "#/components/schemas/ProductoDTO"
+            },
+            "type": "array",
+            "title": "Productos"
+          },
+          "turnos": {
+            "items": {
+              "$ref": "#/components/schemas/TurnoDTO"
+            },
+            "type": "array",
+            "title": "Turnos"
+          },
+          "reputacion": {
+            "$ref": "#/components/schemas/ReputacionDTO"
+          },
+          "hoy": {
+            "type": "string",
+            "format": "date",
+            "title": "Hoy"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "slug",
+          "nombre",
+          "descripcion",
+          "productos",
+          "turnos",
+          "reputacion",
+          "hoy"
+        ],
+        "title": "MiTiendaDTO"
+      },
+      "Motivo": {
+        "properties": {
+          "motivo": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motivo"
+          }
+        },
+        "type": "object",
+        "title": "Motivo"
+      },
+      "NuevaBusqueda": {
+        "properties": {
+          "texto": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Texto"
+          }
+        },
+        "type": "object",
+        "required": [
+          "texto"
+        ],
+        "title": "NuevaBusqueda"
+      },
+      "NuevaCalificacion": {
+        "properties": {
+          "pedido_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Pedido Id"
+          },
+          "estrellas": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Estrellas"
+          },
+          "comentario": {
+            "type": "string",
+            "maxLength": 280,
+            "title": "Comentario",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "pedido_id",
+          "estrellas"
+        ],
+        "title": "NuevaCalificacion"
+      },
+      "NuevaTienda": {
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 2,
+            "title": "Nombre"
+          },
+          "descripcion": {
+            "type": "string",
+            "maxLength": 280,
+            "title": "Descripcion",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "nombre"
+        ],
+        "title": "NuevaTienda"
+      },
+      "NuevoPedido": {
+        "properties": {
+          "turno_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Turno Id"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/LineaDTO"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Items"
+          },
+          "origen": {
+            "$ref": "#/components/schemas/Origen",
+            "default": "tienda"
+          },
+          "busqueda_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Busqueda Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "turno_id",
+          "items"
+        ],
+        "title": "NuevoPedido",
+        "description": "Sin precios ni total: los pone el servidor desde el catalogo (PLAN-TECNICO.md §5.2)."
+      },
+      "NuevoTurno": {
+        "properties": {
+          "fecha": {
+            "type": "string",
+            "format": "date",
+            "title": "Fecha"
+          },
+          "franja_id": {
+            "type": "string",
+            "title": "Franja Id"
+          },
+          "punto_id": {
+            "type": "string",
+            "title": "Punto Id"
+          },
+          "stock": {
+            "items": {
+              "$ref": "#/components/schemas/LineaStock"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Stock"
+          }
+        },
+        "type": "object",
+        "required": [
+          "fecha",
+          "franja_id",
+          "punto_id",
+          "stock"
+        ],
+        "title": "NuevoTurno"
+      },
+      "OfertaDTO": {
+        "properties": {
+          "producto_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Producto Id"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "disponible": {
+            "type": "integer",
+            "title": "Disponible"
+          }
+        },
+        "type": "object",
+        "required": [
+          "producto_id",
+          "total",
+          "disponible"
+        ],
+        "title": "OfertaDTO"
+      },
+      "OpcionPuntoDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nombre"
+        ],
+        "title": "OpcionPuntoDTO"
+      },
+      "Orden": {
+        "type": "string",
+        "enum": [
+          "relevancia",
+          "precio",
+          "calificacion"
+        ],
+        "title": "Orden"
+      },
+      "Origen": {
+        "type": "string",
+        "enum": [
+          "tienda",
+          "busqueda"
+        ],
+        "title": "Origen"
+      },
+      "PedidoDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "codigo": {
+            "type": "string",
+            "title": "Codigo"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/Estado"
+          },
+          "tienda_nombre": {
+            "type": "string",
+            "title": "Tienda Nombre"
+          },
+          "tienda_slug": {
+            "type": "string",
+            "title": "Tienda Slug"
+          },
+          "comprador_nombre": {
+            "type": "string",
+            "title": "Comprador Nombre"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date",
+            "title": "Fecha"
+          },
+          "franja_etiqueta": {
+            "type": "string",
+            "title": "Franja Etiqueta"
+          },
+          "punto_nombre": {
+            "type": "string",
+            "title": "Punto Nombre"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total_cop": {
+            "type": "integer",
+            "title": "Total Cop"
+          },
+          "creado_en": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Creado En"
+          },
+          "vence_en": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Vence En"
+          },
+          "llegada_en": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Llegada En"
+          },
+          "motivo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motivo"
+          },
+          "calificado": {
+            "type": "boolean",
+            "title": "Calificado"
+          },
+          "acciones": {
+            "items": {
+              "$ref": "#/components/schemas/Accion"
+            },
+            "type": "array",
+            "title": "Acciones"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "codigo",
+          "estado",
+          "tienda_nombre",
+          "tienda_slug",
+          "comprador_nombre",
+          "fecha",
+          "franja_etiqueta",
+          "punto_nombre",
+          "items",
+          "total_cop",
+          "creado_en",
+          "vence_en",
+          "llegada_en",
+          "motivo",
+          "calificado",
+          "acciones"
+        ],
+        "title": "PedidoDTO"
+      },
+      "PedirCodigo": {
+        "properties": {
+          "correo": {
+            "type": "string",
+            "format": "email",
+            "title": "Correo"
+          }
+        },
+        "type": "object",
+        "required": [
+          "correo"
+        ],
+        "title": "PedirCodigo"
+      },
+      "ProductoDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "descripcion": {
+            "type": "string",
+            "title": "Descripcion"
+          },
+          "categoria": {
+            "$ref": "#/components/schemas/Categoria"
+          },
+          "etiquetas": {
+            "items": {
+              "$ref": "#/components/schemas/Etiqueta"
+            },
+            "type": "array",
+            "title": "Etiquetas"
+          },
+          "precio_cop": {
+            "type": "integer",
+            "title": "Precio Cop"
+          },
+          "activo": {
+            "type": "boolean",
+            "title": "Activo"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nombre",
+          "descripcion",
+          "categoria",
+          "etiquetas",
+          "precio_cop",
+          "activo"
+        ],
+        "title": "ProductoDTO"
+      },
+      "ProductoEncontradoDTO": {
+        "properties": {
+          "producto_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Producto Id"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "precio_cop": {
+            "type": "integer",
+            "title": "Precio Cop"
+          },
+          "disponible": {
+            "type": "integer",
+            "title": "Disponible"
+          },
+          "cantidad_sugerida": {
+            "type": "integer",
+            "title": "Cantidad Sugerida"
+          }
+        },
+        "type": "object",
+        "required": [
+          "producto_id",
+          "nombre",
+          "precio_cop",
+          "disponible",
+          "cantidad_sugerida"
+        ],
+        "title": "ProductoEncontradoDTO"
+      },
+      "PuntoDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "descripcion": {
+            "type": "string",
+            "title": "Descripcion"
+          },
+          "foto_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Foto Url"
+          },
+          "alias": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Alias"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nombre",
+          "descripcion",
+          "foto_url",
+          "alias"
+        ],
+        "title": "PuntoDTO"
+      },
+      "Refinar": {
+        "properties": {
+          "consulta": {
+            "$ref": "#/components/schemas/ConsultaInterpretada"
+          }
+        },
+        "type": "object",
+        "required": [
+          "consulta"
+        ],
+        "title": "Refinar"
+      },
+      "ReputacionDTO": {
+        "properties": {
+          "promedio": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Promedio"
+          },
+          "resenas": {
+            "type": "integer",
+            "title": "Resenas"
+          },
+          "entregas": {
+            "type": "integer",
+            "title": "Entregas"
+          },
+          "porcentaje_cumplido": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Porcentaje Cumplido"
+          },
+          "rankeable": {
+            "type": "boolean",
+            "title": "Rankeable"
+          }
+        },
+        "type": "object",
+        "required": [
+          "promedio",
+          "resenas",
+          "entregas",
+          "porcentaje_cumplido",
+          "rankeable"
+        ],
+        "title": "ReputacionDTO"
+      },
+      "ResenaDTO": {
+        "properties": {
+          "estrellas": {
+            "type": "integer",
+            "title": "Estrellas"
+          },
+          "comentario": {
+            "type": "string",
+            "title": "Comentario"
+          },
+          "creada_en": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Creada En"
+          }
+        },
+        "type": "object",
+        "required": [
+          "estrellas",
+          "comentario",
+          "creada_en"
+        ],
+        "title": "ResenaDTO"
+      },
+      "ResultadoBusquedaDTO": {
+        "properties": {
+          "busqueda_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Busqueda Id"
+          },
+          "interprete": {
+            "type": "string",
+            "title": "Interprete"
+          },
+          "consulta": {
+            "$ref": "#/components/schemas/ConsultaInterpretada"
+          },
+          "filtros": {
+            "items": {
+              "$ref": "#/components/schemas/FiltroDTO"
+            },
+            "type": "array",
+            "title": "Filtros"
+          },
+          "anulados": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Anulados"
+          },
+          "relajados": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Relajados"
+          },
+          "pregunta_punto": {
+            "items": {
+              "$ref": "#/components/schemas/OpcionPuntoDTO"
+            },
+            "type": "array",
+            "title": "Pregunta Punto"
+          },
+          "tiendas": {
+            "items": {
+              "$ref": "#/components/schemas/TiendaEncontradaDTO"
+            },
+            "type": "array",
+            "title": "Tiendas"
+          }
+        },
+        "type": "object",
+        "required": [
+          "busqueda_id",
+          "interprete",
+          "consulta",
+          "filtros",
+          "anulados",
+          "relajados",
+          "pregunta_punto",
+          "tiendas"
+        ],
+        "title": "ResultadoBusquedaDTO"
+      },
+      "ResumenTiendaDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "slug": {
+            "type": "string",
+            "title": "Slug"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "descripcion": {
+            "type": "string",
+            "title": "Descripcion"
+          },
+          "productos_activos": {
+            "type": "integer",
+            "title": "Productos Activos"
+          },
+          "turnos_abiertos_hoy": {
+            "type": "integer",
+            "title": "Turnos Abiertos Hoy"
+          },
+          "reputacion": {
+            "$ref": "#/components/schemas/ReputacionDTO"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "slug",
+          "nombre",
+          "descripcion",
+          "productos_activos",
+          "turnos_abiertos_hoy",
+          "reputacion"
+        ],
+        "title": "ResumenTiendaDTO"
+      },
+      "SuscripcionDTO": {
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Endpoint"
+          },
+          "keys": {
+            "$ref": "#/components/schemas/Claves"
+          }
+        },
+        "type": "object",
+        "required": [
+          "endpoint",
+          "keys"
+        ],
+        "title": "SuscripcionDTO",
+        "description": "La forma de `PushSubscription.toJSON()` del navegador."
+      },
+      "TiendaDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "slug": {
+            "type": "string",
+            "title": "Slug"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "descripcion": {
+            "type": "string",
+            "title": "Descripcion"
+          },
+          "productos": {
+            "items": {
+              "$ref": "#/components/schemas/ProductoDTO"
+            },
+            "type": "array",
+            "title": "Productos"
+          },
+          "turnos": {
+            "items": {
+              "$ref": "#/components/schemas/TurnoDTO"
+            },
+            "type": "array",
+            "title": "Turnos"
+          },
+          "reputacion": {
+            "$ref": "#/components/schemas/ReputacionDTO"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "slug",
+          "nombre",
+          "descripcion",
+          "productos",
+          "turnos",
+          "reputacion"
+        ],
+        "title": "TiendaDTO"
+      },
+      "TiendaEncontradaDTO": {
+        "properties": {
+          "tienda_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tienda Id"
+          },
+          "slug": {
+            "type": "string",
+            "title": "Slug"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "promedio": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Promedio"
+          },
+          "resenas": {
+            "type": "integer",
+            "title": "Resenas"
+          },
+          "turno_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Turno Id"
+          },
+          "franja_etiqueta": {
+            "type": "string",
+            "title": "Franja Etiqueta"
+          },
+          "punto_id": {
+            "type": "string",
+            "title": "Punto Id"
+          },
+          "punto_nombre": {
+            "type": "string",
+            "title": "Punto Nombre"
+          },
+          "productos": {
+            "items": {
+              "$ref": "#/components/schemas/ProductoEncontradoDTO"
+            },
+            "type": "array",
+            "title": "Productos"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tienda_id",
+          "slug",
+          "nombre",
+          "promedio",
+          "resenas",
+          "turno_id",
+          "franja_etiqueta",
+          "punto_id",
+          "punto_nombre",
+          "productos"
+        ],
+        "title": "TiendaEncontradaDTO"
+      },
+      "TurnoCreadoDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date",
+            "title": "Fecha"
+          },
+          "franja_id": {
+            "type": "string",
+            "title": "Franja Id"
+          },
+          "punto_id": {
+            "type": "string",
+            "title": "Punto Id"
+          },
+          "ofertas": {
+            "items": {
+              "$ref": "#/components/schemas/OfertaDTO"
+            },
+            "type": "array",
+            "title": "Ofertas"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "fecha",
+          "franja_id",
+          "punto_id",
+          "ofertas"
+        ],
+        "title": "TurnoCreadoDTO"
+      },
+      "TurnoDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date",
+            "title": "Fecha"
+          },
+          "franja_id": {
+            "type": "string",
+            "title": "Franja Id"
+          },
+          "franja_etiqueta": {
+            "type": "string",
+            "title": "Franja Etiqueta"
+          },
+          "punto_id": {
+            "type": "string",
+            "title": "Punto Id"
+          },
+          "punto_nombre": {
+            "type": "string",
+            "title": "Punto Nombre"
+          },
+          "abierto": {
+            "type": "boolean",
+            "title": "Abierto"
+          },
+          "ofertas": {
+            "items": {
+              "$ref": "#/components/schemas/OfertaDTO"
+            },
+            "type": "array",
+            "title": "Ofertas"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "fecha",
+          "franja_id",
+          "franja_etiqueta",
+          "punto_id",
+          "punto_nombre",
+          "abierto",
+          "ofertas"
+        ],
+        "title": "TurnoDTO"
+      },
+      "UsuarioDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "campus_id": {
+            "type": "string",
+            "title": "Campus Id"
+          },
+          "correo": {
+            "type": "string",
+            "title": "Correo"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "tienda_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tienda Slug"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "campus_id",
+          "correo",
+          "nombre"
+        ],
+        "title": "UsuarioDTO"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "Verificar": {
+        "properties": {
+          "correo": {
+            "type": "string",
+            "format": "email",
+            "title": "Correo"
+          },
+          "codigo": {
+            "type": "string",
+            "maxLength": 6,
+            "minLength": 6,
+            "pattern": "^\\d{6}$",
+            "title": "Codigo"
+          },
+          "nombre": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 60
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre"
+          },
+          "acepta_terminos": {
+            "type": "boolean",
+            "title": "Acepta Terminos",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "correo",
+          "codigo"
+        ],
+        "title": "Verificar"
+      },
+      "VocabularioDTO": {
+        "properties": {
+          "categorias": {
+            "items": {
+              "$ref": "#/components/schemas/Categoria"
+            },
+            "type": "array",
+            "title": "Categorias"
+          },
+          "etiquetas": {
+            "items": {
+              "$ref": "#/components/schemas/Etiqueta"
+            },
+            "type": "array",
+            "title": "Etiquetas"
+          }
+        },
+        "type": "object",
+        "required": [
+          "categorias",
+          "etiquetas"
+        ],
+        "title": "VocabularioDTO"
+      }
+    }
+  }
+}

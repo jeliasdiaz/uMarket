@@ -1,0 +1,5 @@
+# LF en todo el repo. Los prompts se sellan con sha256 de su texto: un checkout que
+# convierta a CRLF no debe cambiar lo medido (el registro normaliza, pero mejor no depender).
+* text=auto eol=lf
+*.png binary
+*.pdf binary
